@@ -38,8 +38,20 @@ Navigate to Glue studio and create a new Spark job via. script editor
 
 <img width="600" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/Glue_studio_1.png">
 
-After configuring the standard aspects of a Glue job such as choosing an IAM role, renaming and saving the job. Navigate to the job details button, specifically open the advanced properties section, then navigate to libraries sub section  
+After configuring the standard aspects of a Glue job such as choosing an IAM role, renaming and saving the job. Navigate to the job details button, specifically open the advanced properties section, then navigate to libraries sub-section. 
+
+Update the dependent JARs path section with the URI of each JAR file seperate the two URIs with a comma no spaces.
+
+For example if I have my JAR files in a S3 bucket named ```example-bucket``` I would enter the following into the dependent JARs path section of the Glue job details
+
+```s3://example-bucket/iceberg-aws-bundle-1.4.3.jar,s3://example-bucket/iceberg-spark-runtime-3.3_2.12-1.4.3.jar```
+
+The example configuration is pictured below
+
+<img width="500" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/DependJAR.png">
+
+5. Add sample code to Glue job
 
 
 
-5. 
+6. 
