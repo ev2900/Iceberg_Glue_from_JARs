@@ -40,9 +40,9 @@ Navigate to Glue studio and create a new Spark job via. script editor
 
 After configuring the standard aspects of a Glue job such as choosing an IAM role, renaming and saving the job. Navigate to the job details button, specifically open the advanced properties section, then navigate to libraries sub-section. 
 
-Update the dependent JARs path section with the URI of each JAR file seperate the two URIs with a comma no spaces.
+Update the dependent JARs path section with the URI of each JAR file separate the two URIs with a comma no spaces.
 
-For example if I have my JAR files in a S3 bucket named ```example-bucket``` I would enter the following into the dependent JARs path section of the Glue job details
+For example, if I have my JAR files in a S3 bucket named ```example-bucket``` I would enter the following into the dependent JARs path section of the Glue job details
 
 ```s3://example-bucket/iceberg-aws-bundle-1.4.3.jar,s3://example-bucket/iceberg-spark-runtime-3.3_2.12-1.4.3.jar```
 
@@ -52,7 +52,7 @@ The example configuration is pictured below
 
 5. Add sample code to Glue job
 
-You can copy and paste the code from the [sample_job.py](https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/sample_job.py) 
+You can copy and paste the code from the [sample_job.py](https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/sample_job.py). Ensure you replace the ```<s3_bucket_name>``` place holder with the name of the S3 bucket the iceberg data should be stored in.
 
 The key part of sample code is 
 
@@ -69,6 +69,8 @@ spark = SparkSession.builder \
     .getOrCreate()
 ```
 
-In this block of code the spark session is configured to use the JAR files and set other important requirments to for iceberg - in this case in cordination with the Glue data catalog as the meta data store.
+In this block of code, the spark session is configured to use the JAR files and set other important requirements for iceberg - in this case in coordination with the Glue data catalog as the meta data store.
 
-6. 
+6. Save and run the Glue job
+
+<img width="900" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/SaveStart.png">
