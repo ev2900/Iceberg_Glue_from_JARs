@@ -1,8 +1,8 @@
 # Configure AWS Glue to use Iceberg from JAR files
 
-<img width="85" alt="map-user" src="https://img.shields.io/badge/views-0000-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-000-green">
+<img width="85" alt="map-user" src="https://img.shields.io/badge/views-000-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-000-green">
 
-AWS Glue versions 3.0 and up are natively bundled with the dependencies required to run a version of Apache Iceberg. To use the natively bundled version of iceberg that is included with Glue reference the [Using the Iceberg framework in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-format-iceberg.html) documentation. 
+AWS Glue versions 3.0 and up are natively bundled with the dependencies required to run a version of Apache Iceberg. To use the natively bundled version of iceberg that is included with Glue reference the [Using the Iceberg framework in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-format-iceberg.html) documentation.
 
 Additionally, AWS Glue offers market place connectors for Apache Iceberg which can afford you access to different versions of Iceberg.
 
@@ -16,7 +16,7 @@ The instructions below will provide step by step instructions on how you can use
 
 The [release page](https://iceberg.apache.org/releases/) in the iceberg documentation allows you to download the JAR files for iceberg. Each version of iceberg has multiple JAR files avaiable for download. It is important we download the correct JARs.
 
-We want to download the JAR files associated with spark. Ignore the JAR files for flink and hive. For spark, iceberg has different JARs depending on the version of spark. The version of Spark run by Glue is determined by the version of Glue you chose. Use [AWS Glue version](https://docs.aws.amazon.com/glue/latest/dg/release-notes.html) documentation to determine which version of spark the Glue job will use. Once you determine the version of Spark download the corresponding JAR file for iceberg. 
+We want to download the JAR files associated with spark. Ignore the JAR files for flink and hive. For spark, iceberg has different JARs depending on the version of spark. The version of Spark run by Glue is determined by the version of Glue you chose. Use [AWS Glue version](https://docs.aws.amazon.com/glue/latest/dg/release-notes.html) documentation to determine which version of spark the Glue job will use. Once you determine the version of Spark download the corresponding JAR file for iceberg.
 
 An example. If I am using Glue 4.0 the [AWS documentation](https://docs.aws.amazon.com/glue/latest/dg/release-notes.html) informs us that Glue 4.0 uses Spark version 3.3 . Consequently, I would download the download the iceberg JAR for spark that corresponds with spark version 3.3
 
@@ -40,7 +40,7 @@ Navigate to Glue studio and create a new Spark job via. script editor
 
 <img width="600" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/Glue_studio_1.png">
 
-After configuring the standard aspects of a Glue job such as choosing an IAM role, renaming and saving the job. Navigate to the job details button, specifically open the advanced properties section, then navigate to libraries sub-section. 
+After configuring the standard aspects of a Glue job such as choosing an IAM role, renaming and saving the job. Navigate to the job details button, specifically open the advanced properties section, then navigate to libraries sub-section.
 
 Update the dependent JARs path section with the URI of each JAR file separate the two URIs with a comma no spaces.
 
@@ -56,7 +56,7 @@ The example configuration is pictured below
 
 You can copy and paste the code from the [sample_job.py](https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/sample_job.py). Ensure you replace the ```<s3_bucket_name>``` place holder with the name of the S3 bucket the iceberg data should be stored in.
 
-The key part of sample code is 
+The key part of sample code is
 
 ```
 from pyspark.sql import SparkSession
