@@ -1,2 +1,2 @@
-# Iceberg_Glue_from_JARs
-Work in Progress - Configure any version of Apache Iceberg with AWS Glue by installing Iceberg from JAR files
+# Confgirue AWS Glue to use Iceberg from JAR files
+
