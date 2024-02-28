@@ -52,6 +52,23 @@ The example configuration is pictured below
 
 5. Add sample code to Glue job
 
+You can copy and paste the code from the [sample_job.py](https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/sample_job.py) 
 
+The key part of sample code is 
+
+```
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder \
+    .appName("IcebergIntegration") \
+    .config("spark.sql.extensions", "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions") \
+    .config("spark.sql.catalog.glue_catalog", "org.apache.iceberg.spark.SparkCatalog") \
+    .config("spark.sql.catalog.glue_catalog.warehouse", "s3://<s3_bucket_name>/icebergconf/") \
+    .config("spark.sql.catalog.glue_catalog.catalog-impl", "org.apache.iceberg.aws.glue.GlueCatalog") \
+    .config("spark.sql.catalog.glue_catalog.io-impl", "org.apache.iceberg.aws.s3.S3FileIO") \
+    .getOrCreate()
+```
+
+In this block of code the spark session is configured to use the JAR files and set other important requirments to for iceberg - in this case in cordination with the Glue data catalog as the meta data store.
 
 6. 
