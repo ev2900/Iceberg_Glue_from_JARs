@@ -26,4 +26,8 @@ An example. Working with Iceberg version 1.4.3 and AWS Glue 4.0 I would download
 
 <img width="400" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/JARS.png">
 
-3. 
+3. Upload the JAR files to S3
+
+Upload both of the JAR files to S3
+
+4. 
