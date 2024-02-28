@@ -34,6 +34,12 @@ Upload both of the JAR files to S3
 
 4. Create an configure a Glue job
 
+Navigate to Glue studio and create a new Spark job via. script editor
+
+<img width="600" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/Glue_studio_1.png">
+
+After configuring the standard aspects of a Glue job such as choosing an IAM role, renaming and saving the job. Navigate to the job details button, specifically open the advanced properties section, then navigate to libraries sub section  
+
 
 
 5. 
