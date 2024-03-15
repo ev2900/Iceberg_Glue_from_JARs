@@ -76,3 +76,6 @@ In this block of code, the spark session is configured to use the JAR files and 
 6. Save and run the Glue job
 
 <img width="900" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/SaveStart.png">
+
+## Future imporvements for this repositroy
+* Add a CloudFormation stack to deploy the sample Glue job with all of the required configurations documented ^
