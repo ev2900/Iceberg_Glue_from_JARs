@@ -49,6 +49,5 @@ spark.sql(query)
 # Read sample data 
 query = f"""SELECT * FROM glue_catalog.iceberg.sampledataicebergtable"""
 
-resultsDf = spark.sql(query)
-
-resultsDf.show()
+#resultsDf = spark.sql(query)
+#resultsDf.show()
