@@ -32,7 +32,7 @@ Resources:
   #
   # Lambda Function to download Iceberg Jar files
   # 
-  LoadCSVLambdaFunction:
+  DownloadJARsLambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: 'Download-Iceberg-Jar'
@@ -93,7 +93,6 @@ Resources:
                 'statusCode': 400,
                 'body': 'failed to download JAR files to S3'
               }
-            
       Timeout: 300
       Environment:
         Variables:
@@ -102,9 +101,9 @@ Resources:
   #
   # Customer resource to execute the load CSV lambda function
   #
-  LoadCSVtoS3CustomResource:
+  DownloadJARsLambdaFunctionCustomResource:
     Type: AWS::CloudFormation::CustomResource
-    DependsOn: LoadCSVLambdaFunction
+    DependsOn: DownloadJARsLambdaFunction
     Version: 1.0
     Properties:
-      ServiceToken: !GetAtt LoadCSVLambdaFunction.Arn
+      ServiceToken: !GetAtt DownloadJARsLambdaFunction.Arn
