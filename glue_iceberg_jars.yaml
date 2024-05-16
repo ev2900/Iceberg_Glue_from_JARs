@@ -1,0 +1,73 @@
+Description: CloudFormation Deployment of Glue with Iceberg installed from Jar files
+Resources:
+  #
+  # S3 Bucket
+  #
+  S3Bucket:
+    Type: AWS::S3::Bucket
+
+  #
+  # Lambda Function IAM Role
+  # 
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: "sts:AssumeRole"
+      Policies:
+        # Imporvement required - premissions need to be scoped down
+        - PolicyName: Admin
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: 
+                  - '*'
+                Resource: '*'
+  #
+  # Lambda Function to download Iceberg Jar files
+  # 
+  LoadCSVLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: 'Download-Iceberg-Jar'
+      Handler: index.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Runtime: python3.8
+      Code:
+        ZipFile: |
+          
+          import cfnresponse
+          
+          def lambda_handler(event, context):
+
+            print(event)
+
+            # Return success status to cloudformation 
+            responseData = {'Status': 'SUCCESS', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
+            cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
+
+            # Return lambda response
+            return {
+              'statusCode': 200,
+              'body': json.dumps('Iceberg Jar files')
+            }
+      Timeout: 180
+      Environment:
+        Variables:
+          BUCKET_NAME: 'Hello world'
+      
+  #
+  # Customer resource to execute the load CSV lambda function
+  #
+  LoadCSVtoS3CustomResource:
+    Type: AWS::CloudFormation::CustomResource
+    DependsOn: LoadCSVLambdaFunction
+    Version: 1.0
+    Properties:
+      ServiceToken: !GetAtt LoadCSVLambdaFunction.Arn
