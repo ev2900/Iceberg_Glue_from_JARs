@@ -32,12 +32,17 @@ An example. Working with Iceberg version 1.5.2 and AWS Glue 4.0 I would download
 
 Upload both of the JAR files to S3
 
-<img width="600" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/S3.png">
+<img width="700" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/S3.png">
 
 4. Create Glue Data Catalog Database
 
+Navigate to the AWS Glue home page in the AWS console. Under the Glue Data Catalog section, select databases and click on add database
 
-   
+<img width="700" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/create_database_1.png">
+
+Name the database ```iceberg```
+
+<img width="500" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/create_database_2.png">
 
 6. Create and configure a Glue job
 
