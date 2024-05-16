@@ -1,6 +1,6 @@
 # Configure AWS Glue to use Iceberg from JAR files
 
-<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-00-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-366-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-068-green">
+<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-12-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-366-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-068-green">
 
 AWS Glue versions 3.0 and up are natively bundled with the dependencies required to run a version of Apache Iceberg. To use the natively bundled version of iceberg that is included with Glue reference the [Using the Iceberg framework in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-format-iceberg.html) documentation.
 
@@ -10,13 +10,13 @@ If you do not want to use the natively bundled version of iceberg and you do not
 
 The instructions below will provide step by step instructions on how you can use iceberg in your Glue job via. dependent JAR files
 
-## Instructions 
+## Instructions
 
 There are two ways to run the example either via. a [CloudFormation stack](https://github.com/ev2900/Iceberg_Glue_from_JARs/tree/main?tab=readme-ov-file#deploy-via-cloudformation-stack) or going [step by step in the AWS console](https://github.com/ev2900/Iceberg_Glue_from_JARs/tree/main?tab=readme-ov-file#deploy-via-aws-console)
 
 ### Deploy via. CloudFormation Stack
 
-Click on the button below to deploy a CloudFormation stack. 
+Click on the button below to deploy a CloudFormation stack.
 
 [![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=glue-iceberg-from-jars&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/glue_iceberg_jars.yaml)
 
