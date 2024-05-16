@@ -24,7 +24,7 @@ An example. If I am using Glue 4.0 the [AWS documentation](https://docs.aws.amaz
 
 The [release page](https://iceberg.apache.org/releases/) in the iceberg documentation also includes the option to download an ```aws-bundle``` JAR file download the ```aws-bundle``` JAR file that corresponds with the version of the iceberg JAR you downloaded
 
-An example. Working with Iceberg version 1.4.3 and AWS Glue 4.0 I would download the following JARS
+An example. Working with Iceberg version 1.5.2 and AWS Glue 4.0 I would download the following JARS
 
 <img width="400" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/JARS.png">
 
