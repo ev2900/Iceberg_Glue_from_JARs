@@ -12,7 +12,7 @@ The instructions below will provide step by step instructions on how you can use
 
 ## Instructions 
 
-There are two ways to 
+There are two ways to run the example either via. a [CloudFormation stack](https://github.com/ev2900/Iceberg_Glue_from_JARs/tree/main?tab=readme-ov-file#deploy-via-cloudformation-stack) or going [step by step in the AWS console](https://github.com/ev2900/Iceberg_Glue_from_JARs/tree/main?tab=readme-ov-file#deploy-via-aws-console)
 
 ### Deploy via. CloudFormation Stack
 
