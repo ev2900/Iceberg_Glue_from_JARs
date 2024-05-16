@@ -78,7 +78,7 @@ Resources:
               
             # Return success status to cloudformation 
             responseData = {'Status': 'SUCCESS', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
-            fnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
+            cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
 
             # Return lambda response
             return {
