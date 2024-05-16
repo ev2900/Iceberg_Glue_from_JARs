@@ -34,7 +34,12 @@ Upload both of the JAR files to S3
 
 <img width="600" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/S3.png">
 
-4. Create an configure a Glue job
+4. Create Glue Data Catalog Database
+
+
+   
+
+6. Create and configure a Glue job
 
 Navigate to Glue studio and create a new Spark job via. script editor
 
@@ -52,7 +57,7 @@ The example configuration is pictured below
 
 <img width="500" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/DependJAR.png">
 
-5. Add sample code to Glue job
+6. Add sample code to Glue job
 
 You can copy and paste the code from the [sample_job.py](https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/sample_job.py). Ensure you replace the ```<s3_bucket_name>``` place holder with the name of the S3 bucket the iceberg data should be stored in.
 
@@ -73,7 +78,7 @@ spark = SparkSession.builder \
 
 In this block of code, the spark session is configured to use the JAR files and set other important requirements for iceberg - in this case in coordination with the Glue data catalog as the meta data store.
 
-6. Save and run the Glue job
+7. Save and run the Glue job
 
 <img width="900" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/SaveStart.png">
 
