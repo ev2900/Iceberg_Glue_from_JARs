@@ -43,24 +43,60 @@ Resources:
         ZipFile: |
           
           import cfnresponse
+          import urllib3
+          import boto3
           
           def lambda_handler(event, context):
+  
+            s3 = boto3.client('s3')
+            http = urllib3.PoolManager()
 
             print(event)
 
+            try:
+              # AWS Bundle
+              response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-aws-bundle/1.5.2/iceberg-aws-bundle-1.5.2.jar')
+    
+              if response.status == 200:
+                with open('/tmp/iceberg-aws-bundle-1.5.2.jar', 'wb') as f:
+                  f.write(response.data)
+        
+            s3.upload_file('/tmp/iceberg-aws-bundle-1.5.2.jar', 'glue-iceberg-from-jars-s3bucket-vpssbkrdog2i', 'jars/iceberg-aws-bundle-1.5.2.jar')
+    
+            # Iceberg
+            response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-spark-runtime-3.3_2.12/1.5.2/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
+    
+            if response.status == 200:
+              with open('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', 'wb') as f:
+                f.write(response.data)
+        
+            s3.upload_file('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', 'glue-iceberg-from-jars-s3bucket-vpssbkrdog2i', 'jars/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
+    
             # Return success status to cloudformation 
             responseData = {'Status': 'SUCCESS', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
-            cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
+            fnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
 
             # Return lambda response
             return {
               'statusCode': 200,
-              'body': json.dumps('Iceberg Jar files')
+              'body': 'successfully download JAR files to S3'
             }
-      Timeout: 180
+
+          except:
+            # Return success status to cloudformation 
+            responseData = {'Status': 'FAILURE', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
+            fnresponse.send(event, context, cfnresponse.FAILURE, responseData)
+    
+            # Return lambda response
+            return {
+              'statusCode': 400,
+              'body': 'failed to download JAR files to S3'
+            }
+            
+      Timeout: 300
       Environment:
         Variables:
-          BUCKET_NAME: 'Hello world'
+          BUCKET_NAME: !Ref S3Bucket
       
   #
   # Customer resource to execute the load CSV lambda function
