@@ -61,26 +61,26 @@ Resources:
                 with open('/tmp/iceberg-aws-bundle-1.5.2.jar', 'wb') as f:
                   f.write(response.data)
         
-            s3.upload_file('/tmp/iceberg-aws-bundle-1.5.2.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-aws-bundle-1.5.2.jar')
+              s3.upload_file('/tmp/iceberg-aws-bundle-1.5.2.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-aws-bundle-1.5.2.jar')
     
-            # Iceberg
-            response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-spark-runtime-3.3_2.12/1.5.2/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
+              # Iceberg
+              response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-spark-runtime-3.3_2.12/1.5.2/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
     
-            if response.status == 200:
-              with open('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', 'wb') as f:
-                f.write(response.data)
+              if response.status == 200:
+                with open('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', 'wb') as f:
+                  f.write(response.data)
         
-            s3.upload_file('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
+              s3.upload_file('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
     
-            # Return success status to cloudformation 
-            responseData = {'Status': 'SUCCESS', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
-            fnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
+              # Return success status to cloudformation 
+              responseData = {'Status': 'SUCCESS', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
+              fnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
 
-            # Return lambda response
-            return {
-              'statusCode': 200,
-              'body': 'successfully download JAR files to S3'
-            }
+              # Return lambda response
+              return {
+                'statusCode': 200,
+                'body': 'successfully download JAR files to S3'
+              }
 
           except:
             # Return success status to cloudformation 
