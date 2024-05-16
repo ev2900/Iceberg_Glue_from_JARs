@@ -10,7 +10,19 @@ If you do not want to use the natively bundled version of iceberg and you do not
 
 The instructions below will provide step by step instructions on how you can use iceberg in your Glue job via. dependent JAR files
 
-## Instructions
+## Instructions 
+
+### Deploy via. CloudFormation Stack
+
+Click on the button below to deploy a CloudFormation stack. 
+
+[![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=glue-iceberg-from-jars&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/0_data_zone_fsi_cloudformation.yaml)
+
+The stack will create an S3 bucket with the required JARs files and a Glue job. After the deployment of the CloudFormation stack open the Glue console, click on the job and the run the job
+
+<img width="900" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/Start.png">
+
+### Deploy via. AWS Console
 
 1. Identify and download the iceberg JAR file
 
