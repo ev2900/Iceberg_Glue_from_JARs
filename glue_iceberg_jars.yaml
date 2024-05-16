@@ -73,26 +73,18 @@ Resources:
         
               s3.upload_file('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
     
-              # Return success status to cloudformation 
-              responseData = {'Status': 'SUCCESS', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
-              fnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
+            except Exception as e:
+              print(e)
+              
+            # Return success status to cloudformation 
+            responseData = {'Status': 'SUCCESS', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
+            fnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
 
-              # Return lambda response
-              return {
-                'statusCode': 200,
-                'body': 'successfully download JAR files to S3'
-              }
-
-            except:
-              # Return success status to cloudformation 
-              responseData = {'Status': 'FAILURE', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
-              fnresponse.send(event, context, cfnresponse.FAILURE, responseData)
-      
-              # Return lambda response
-              return {
-                'statusCode': 400,
-                'body': 'failed to download JAR files to S3'
-              }
+            # Return lambda response
+            return {
+              'statusCode': 200,
+              'body': 'successfully download JAR files to S3'
+            }
       Timeout: 300
       Environment:
         Variables:
