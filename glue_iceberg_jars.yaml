@@ -61,7 +61,7 @@ Resources:
                 with open('/tmp/iceberg-aws-bundle-1.5.2.jar', 'wb') as f:
                   f.write(response.data)
         
-            s3.upload_file('/tmp/iceberg-aws-bundle-1.5.2.jar', 'glue-iceberg-from-jars-s3bucket-vpssbkrdog2i', 'jars/iceberg-aws-bundle-1.5.2.jar')
+            s3.upload_file('/tmp/iceberg-aws-bundle-1.5.2.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-aws-bundle-1.5.2.jar')
     
             # Iceberg
             response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-spark-runtime-3.3_2.12/1.5.2/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
@@ -70,7 +70,7 @@ Resources:
               with open('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', 'wb') as f:
                 f.write(response.data)
         
-            s3.upload_file('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', 'glue-iceberg-from-jars-s3bucket-vpssbkrdog2i', 'jars/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
+            s3.upload_file('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
     
             # Return success status to cloudformation 
             responseData = {'Status': 'SUCCESS', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
@@ -96,7 +96,7 @@ Resources:
       Timeout: 300
       Environment:
         Variables:
-          BUCKET_NAME: !Ref S3Bucket
+          S3_BUCKET_NAME: !Ref S3Bucket
       
   #
   # Customer resource to execute the load CSV lambda function
