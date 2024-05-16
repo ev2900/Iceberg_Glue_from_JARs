@@ -49,9 +49,9 @@ After configuring the standard aspects of a Glue job such as choosing an IAM rol
 
 Update the dependent JARs path section with the URI of each JAR file separate the two URIs with a comma no spaces.
 
-For example, if I have my JAR files in a S3 bucket named ```example-bucket``` I would enter the following into the dependent JARs path section of the Glue job details
+For example, if I have my JAR files in a S3 bucket named ```<example-bucket>``` I would enter the following into the dependent JARs path section of the Glue job details
 
-```s3://example-bucket/iceberg-aws-bundle-1.4.3.jar,s3://example-bucket/iceberg-spark-runtime-3.3_2.12-1.4.3.jar```
+```s3://<example-bucket>/jars/iceberg-aws-bundle-1.5.2.jar,s3://<example-bucket>/jars/iceberg-spark-runtime-3.3_2.12-1.5.2.jar```
 
 The example configuration is pictured below
 
