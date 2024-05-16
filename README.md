@@ -12,6 +12,8 @@ The instructions below will provide step by step instructions on how you can use
 
 ## Instructions 
 
+There are two ways to 
+
 ### Deploy via. CloudFormation Stack
 
 Click on the button below to deploy a CloudFormation stack. 
