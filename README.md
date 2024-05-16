@@ -18,7 +18,7 @@ There are two ways to
 
 Click on the button below to deploy a CloudFormation stack. 
 
-[![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=glue-iceberg-from-jars&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/0_data_zone_fsi_cloudformation.yaml)
+[![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=glue-iceberg-from-jars&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/glue_iceberg_jars.yaml)
 
 The stack will create an S3 bucket with the required JARs files and a Glue job. After the deployment of the CloudFormation stack open the Glue console, click on the job and the run the job
 
