@@ -82,16 +82,16 @@ Resources:
                 'body': 'successfully download JAR files to S3'
               }
 
-          except:
-            # Return success status to cloudformation 
-            responseData = {'Status': 'FAILURE', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
-            fnresponse.send(event, context, cfnresponse.FAILURE, responseData)
-    
-            # Return lambda response
-            return {
-              'statusCode': 400,
-              'body': 'failed to download JAR files to S3'
-            }
+            except:
+              # Return success status to cloudformation 
+              responseData = {'Status': 'FAILURE', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
+              fnresponse.send(event, context, cfnresponse.FAILURE, responseData)
+      
+              # Return lambda response
+              return {
+                'statusCode': 400,
+                'body': 'failed to download JAR files to S3'
+              }
             
       Timeout: 300
       Environment:
