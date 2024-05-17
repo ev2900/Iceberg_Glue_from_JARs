@@ -74,6 +74,12 @@ Resources:
               s3.upload_file('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
 
               # Glue Job Script
+              copy_source = {
+                'Bucket': 'sharkech-public',
+                'Key': 'misc-public/sample_job.py'
+              }
+
+              s3.copy_object(CopySource = copy_source, Bucket = os.environ['S3_BUCKET_NAME'], Key = 'scripts/sample_job.py')
     
             except Exception as e:
               print(e)
@@ -144,7 +150,8 @@ Resources:
     Type: 'AWS::Glue::Job'
     Properties:
       Name: 'Iceberg from Jars'
-      
+      Command:
+        ScriptLocation: !Sub 's3://${S3_BUCKET_NAME}/scripts/sample_job.py'
       MaxRetries: 0
       GlueVersion: '4.0'
       NumberOfWorkers: 2
