@@ -32,10 +32,10 @@ Resources:
   #
   # Lambda Function to download Iceberg Jar files
   # 
-  DownloadJARsLambdaFunction:
+  DownloadJARsScriptLambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
-      FunctionName: 'Download-Iceberg-Jar'
+      FunctionName: 'Download-Iceberg-Jar-and-Glue-Script'
       Handler: index.lambda_handler
       Role: !GetAtt LambdaExecutionRole.Arn
       Runtime: python3.8
@@ -72,6 +72,8 @@ Resources:
                   f.write(response.data)
         
               s3.upload_file('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
+
+              # Glue Job Script
     
             except Exception as e:
               print(e)
@@ -95,10 +97,10 @@ Resources:
   #
   DownloadJARsLambdaFunctionCustomResource:
     Type: AWS::CloudFormation::CustomResource
-    DependsOn: DownloadJARsLambdaFunction
+    DependsOn: DownloadJARsScriptLambdaFunction
     Version: 1.0
     Properties:
-      ServiceToken: !GetAtt DownloadJARsLambdaFunction.Arn
+      ServiceToken: !GetAtt DownloadJARsScriptLambdaFunction.Arn
 
 
   #
