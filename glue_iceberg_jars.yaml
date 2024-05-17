@@ -110,7 +110,7 @@ Resources:
 
             elif event['RequestType'] == 'Delete':
               try:
-                bucket = s3.Bucket(os.environ['S3_BUCKET_NAME'])
+                bucket = s3.Bucket(os.environ['S3_BUCKET_NAME'] + 'jars/')
                 bucket.objects.all().delete()
 
                 responseData = {'Status': 'SUCCESS', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
