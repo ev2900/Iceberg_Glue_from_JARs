@@ -152,7 +152,7 @@ Resources:
       Name: 'Iceberg from Jars'
       Role: !GetAtt GlueExecutionRole.Arn
       Command:
-        Name: 'icebergglueetl'
+        Name: 'glueetl'
         ScriptLocation: !Join 
           - ''
           - - 's3://'
