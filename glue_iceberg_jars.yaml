@@ -110,8 +110,16 @@ Resources:
 
             elif event['RequestType'] == 'Delete':
               try:
-                bucket = s3.Bucket(os.environ['S3_BUCKET_NAME'] + 'jars/')
-                bucket.objects.all().delete()
+                for prefix in folder_prefixes:
+
+                  objects_to_delete = bucket.objects.filter(Prefix='jars')
+                  objects_to_delete.delete()
+                    
+                  objects_to_delete = bucket.objects.filter(Prefix='jars')
+                  objects_to_delete.delete()
+                    
+                  objects_to_delete = bucket.objects.filter(Prefix='iceberg')
+                  objects_to_delete.delete()
 
                 responseData = {'Status': 'SUCCESS', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
                 cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
