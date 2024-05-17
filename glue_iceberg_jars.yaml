@@ -110,6 +110,9 @@ Resources:
 
             elif event['RequestType'] == 'Delete':
               try:
+                s3 = boto3.resource('s3')
+                bucket = s3.Bucket(os.environ['S3_BUCKET_NAME'])
+              
                 for prefix in ['jars', 'scripts', 'iceberg']:
                   objects_to_delete = bucket.objects.filter(Prefix=prefix)
                   objects_to_delete.delete()
