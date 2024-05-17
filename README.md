@@ -76,6 +76,10 @@ The example configuration is pictured below
 
 <img width="500" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/DependJAR.png">
 
+Additonally add a job ```--s3_bucket_name``` with the name of the S3 bucket that you want the job to write the sample iceberg data to
+
+<img width="500" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/s3_bucket_name_param.png">
+
 6. Add sample code to Glue job
 
 Copy and paste the code from the [sample_job.py](https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/sample_job.py) into the Glue script section
