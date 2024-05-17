@@ -168,6 +168,7 @@ Resources:
             - 's3://'
             - !Ref S3Bucket
             - '/jars/iceberg-spark-runtime-3.3_2.12-1.5.2.jar'
+        '--s3-bucket-name': !Ref S3Bucket
       MaxRetries: 0
       GlueVersion: '4.0'
       NumberOfWorkers: 2
