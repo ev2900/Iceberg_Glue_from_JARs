@@ -52,47 +52,66 @@ Resources:
             s3 = boto3.client('s3')
             http = urllib3.PoolManager()
 
+            print('-- Event below --')
             print(event)
+            print('--')
 
-            try:
-              # AWS Bundle
-              response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-aws-bundle/1.5.2/iceberg-aws-bundle-1.5.2.jar')
-    
-              if response.status == 200:
-                with open('/tmp/iceberg-aws-bundle-1.5.2.jar', 'wb') as f:
-                  f.write(response.data)
-        
-              s3.upload_file('/tmp/iceberg-aws-bundle-1.5.2.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-aws-bundle-1.5.2.jar')
-    
-              # Iceberg
-              response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-spark-runtime-3.3_2.12/1.5.2/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
-    
-              if response.status == 200:
-                with open('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', 'wb') as f:
-                  f.write(response.data)
-        
-              s3.upload_file('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
+            if event['RequestType'] == 'Create':
+              try:
+                # AWS Bundle
+                response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-aws-bundle/1.5.2/iceberg-aws-bundle-1.5.2.jar')
+      
+                if response.status == 200:
+                  with open('/tmp/iceberg-aws-bundle-1.5.2.jar', 'wb') as f:
+                    f.write(response.data)
+          
+                s3.upload_file('/tmp/iceberg-aws-bundle-1.5.2.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-aws-bundle-1.5.2.jar')
+      
+                # Iceberg
+                response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-spark-runtime-3.3_2.12/1.5.2/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
+      
+                if response.status == 200:
+                  with open('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', 'wb') as f:
+                    f.write(response.data)
+          
+                s3.upload_file('/tmp/iceberg-spark-runtime-3.3_2.12-1.5.2.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-spark-runtime-3.3_2.12-1.5.2.jar')
+  
+                # Glue Job Script
+                copy_source = {
+                  'Bucket': 'sharkech-public',
+                  'Key': 'misc-public/sample_job.py'
+                }
+  
+                s3.copy_object(CopySource = copy_source, Bucket = os.environ['S3_BUCKET_NAME'], Key = 'scripts/sample_job.py')
 
-              # Glue Job Script
-              copy_source = {
-                'Bucket': 'sharkech-public',
-                'Key': 'misc-public/sample_job.py'
-              }
+                # Return success status to cloudformation 
+                responseData = {'Status': 'SUCCESS', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
+                cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
 
-              s3.copy_object(CopySource = copy_source, Bucket = os.environ['S3_BUCKET_NAME'], Key = 'scripts/sample_job.py')
-    
-            except Exception as e:
-              print(e)
-              
-            # Return success status to cloudformation 
-            responseData = {'Status': 'SUCCESS', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
-            cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
+                 # Return lambda response
+                return {
+                  'statusCode': 200,
+                  'body': 'successfully download JAR files to S3'
+                }
+                
+              except Exception as e:
 
-            # Return lambda response
-            return {
-              'statusCode': 200,
-              'body': 'successfully download JAR files to S3'
-            }
+                print('-- Error below --')
+                print(e)
+                print('--')
+
+                responseData = {'Status': 'FAILURE', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
+                cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
+
+                 # Return lambda response
+                return {
+                  'statusCode': 200,
+                  'body': 'successfully download JAR files to S3'
+                }
+
+            if event['RequestType'] == 'Delete':
+              print('Delete')
+                
       Timeout: 300
       Environment:
         Variables:
