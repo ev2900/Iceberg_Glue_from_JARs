@@ -159,6 +159,15 @@ Resources:
             - !Ref S3Bucket
             - '/scripts/sample_job.py'
         PythonVersion: '3'
+      DefaultArguments:
+        '--extra-jars': !Join
+          - ','
+          - - 's3://'
+            - !Ref S3Bucket
+            - 'jars/iceberg-aws-bundle-1.5.2.jar'
+          - - 's3://'
+            - !Ref S3Bucket
+            - '/jars/iceberg-spark-runtime-3.3_2.12-1.5.2.jar'
       MaxRetries: 0
       GlueVersion: '4.0'
       NumberOfWorkers: 2
