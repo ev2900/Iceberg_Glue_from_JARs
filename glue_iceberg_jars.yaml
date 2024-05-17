@@ -110,3 +110,41 @@ Resources:
       CatalogId: !Ref 'AWS::AccountId'
       DatabaseInput:
         Name: 'iceberg'
+
+  #
+  # Lambda Function IAM Role
+  # 
+  GlueExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: glue.amazonaws.com
+            Action: "sts:AssumeRole"
+      Policies:
+        # Imporvement required - premissions need to be scoped down
+        - PolicyName: Admin
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: 
+                  - '*'
+                Resource: '*'
+
+  #
+  # Glue Job
+  #
+  IcebergGlueJob:
+    Type: 'AWS::Glue::Job'
+    Properties:
+      Name: 'Iceberg from Jars'
+      
+      MaxRetries: 0
+      GlueVersion: '4.0'
+      NumberOfWorkers: 2
+      WorkerType: 'G.1X'
+      Timeout: 2880
