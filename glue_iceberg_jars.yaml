@@ -91,26 +91,38 @@ Resources:
                  # Return lambda response
                 return {
                   'statusCode': 200,
-                  'body': 'successfully download JAR files to S3'
+                  'body': 'successfully download JAR files and glue script to S3'
                 }
                 
               except Exception as e:
-
-                print('-- Error below --')
+                print('-- Error for create request type --')
                 print(e)
                 print('--')
 
                 responseData = {'Status': 'FAILURE', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
                 cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
 
-                 # Return lambda response
+                # Return lambda response
                 return {
-                  'statusCode': 200,
-                  'body': 'successfully download JAR files to S3'
+                  'statusCode': 400,
+                  'body': 'failed to download JAR files and glue script to S3'
                 }
 
-            if event['RequestType'] == 'Delete':
-              print('Delete')
+            elif event['RequestType'] == 'Delete':
+              try:
+                bucket = s3.Bucket(os.environ['S3_BUCKET_NAME'])
+                bucket.objects.all().delete()
+                
+              except Exception as e:
+                print('-- Error for delete request type --')
+                print(e)
+                print('--')
+
+                # Return lambda response
+                return {
+                  'statusCode': 400,
+                  'body': 'failed to delete files from S3'
+                }
                 
       Timeout: 300
       Environment:
