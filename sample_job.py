@@ -7,7 +7,7 @@ from datetime import datetime
 import sys
 from awsglue.utils import getResolvedOptions
 
-# Get S3 bucket name from job parameters
+# Create an array of the job parameters
 args = getResolvedOptions(sys.argv, ['s3-bucket-name'])
 
 # Initialize a SparkSession
