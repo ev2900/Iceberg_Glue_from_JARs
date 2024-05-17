@@ -99,3 +99,14 @@ Resources:
     Version: 1.0
     Properties:
       ServiceToken: !GetAtt DownloadJARsLambdaFunction.Arn
+
+
+  #
+  # Glue data catalog, database
+  #
+  GlueDatabase:
+    Type: 'AWS::Glue::Database'
+    Properties:
+      CatalogId: !Ref 'AWS::AccountId'
+      DatabaseInput:
+        Name: 'iceberg'
