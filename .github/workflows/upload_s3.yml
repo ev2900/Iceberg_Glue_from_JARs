@@ -28,5 +28,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
           
-      - name: Upload OpenSearch_cloudwatch_alarms.yaml to S3
+      - name: Upload glue_iceberg_jars.yamlto S3
         run: aws s3 cp /home/runner/work/Iceberg_Glue_from_JARs/Iceberg_Glue_from_JARs/glue_iceberg_jars.yaml s3://sharkech-public/misc-public/glue_iceberg_jars.yaml
+
+      - name: Upload sample_job.py to S3
+        run: aws s3 cp /home/runner/work/Iceberg_Glue_from_JARs/Iceberg_Glue_from_JARs/sample_job.py s3://sharkech-public/misc-public/sample_job.py
