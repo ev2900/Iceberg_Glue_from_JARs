@@ -110,15 +110,8 @@ Resources:
 
             elif event['RequestType'] == 'Delete':
               try:
-                for prefix in folder_prefixes:
-
-                  objects_to_delete = bucket.objects.filter(Prefix='jars')
-                  objects_to_delete.delete()
-                    
-                  objects_to_delete = bucket.objects.filter(Prefix='jars')
-                  objects_to_delete.delete()
-                    
-                  objects_to_delete = bucket.objects.filter(Prefix='iceberg')
+                for prefix in ['jars', 'scripts', 'iceberg']:
+                  objects_to_delete = bucket.objects.filter(Prefix=prefix)
                   objects_to_delete.delete()
 
                 responseData = {'Status': 'SUCCESS', 'StackId': event['StackId'], 'RequestId': event['RequestId'], 'LogicalResourceId': event['LogicalResourceId'], 'PhysicalResourceId': ''}
