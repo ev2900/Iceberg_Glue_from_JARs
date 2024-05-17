@@ -152,11 +152,13 @@ Resources:
       Name: 'Iceberg from Jars'
       Role: !GetAtt GlueExecutionRole.Arn
       Command:
+        Name: 'icebergglueetl'
         ScriptLocation: !Join 
           - ''
           - - 's3://'
             - !Ref S3Bucket
             - '/scripts/sample_job.py'
+        PythonVersion: '3'
       MaxRetries: 0
       GlueVersion: '4.0'
       NumberOfWorkers: 2
