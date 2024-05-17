@@ -120,7 +120,7 @@ Resources:
         Name: 'iceberg'
 
   #
-  # Lambda Function IAM Role
+  # Glue Execution IAM Role
   # 
   GlueExecutionRole:
     Type: AWS::IAM::Role
@@ -150,6 +150,7 @@ Resources:
     Type: 'AWS::Glue::Job'
     Properties:
       Name: 'Iceberg from Jars'
+      Role: !GetAtt GlueExecutionRole.Arn
       Command:
         ScriptLocation: !Join 
           - ''
