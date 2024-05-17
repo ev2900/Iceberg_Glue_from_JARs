@@ -151,7 +151,11 @@ Resources:
     Properties:
       Name: 'Iceberg from Jars'
       Command:
-        ScriptLocation: !Sub 's3://${S3_BUCKET_NAME}/scripts/sample_job.py'
+        ScriptLocation: !Join 
+          - ''
+          - - 's3://'
+            - !Ref S3Bucket
+            - '/scripts/sample_job.py'
       MaxRetries: 0
       GlueVersion: '4.0'
       NumberOfWorkers: 2
