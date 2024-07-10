@@ -56,3 +56,39 @@ query = f"""SELECT * FROM glue_catalog.iceberg.sampledataicebergtable"""
 
 #resultsDf = spark.sql(query)
 #resultsDf.show()
+
+#
+#
+# Optional - merge updates into Iceberg tables
+#
+#
+data = [
+        (1, "Christopher", "2020-01-01", datetime.strptime('2020-01-02 00:00:00', '%Y-%m-%d %H:%M:%S'), "update"),
+        (3, "Emmeline", "2020-01-01", datetime.strptime('2020-01-02 00:00:00', '%Y-%m-%d %H:%M:%S'), "update"),
+        (5, "Eric", "2020-01-01", datetime.strptime('2020-01-02 00:00:00', '%Y-%m-%d %H:%M:%S'), "delete"),
+        (7, "Bill", "2020-01-02", datetime.strptime('2020-01-02 00:00:00', '%Y-%m-%d %H:%M:%S'), "append")
+]
+
+schema = StructType([
+        StructField("id", IntegerType(), False),
+        StructField("name", StringType(), False), 
+        StructField("create_date", StringType(), False),             
+        StructField("last_update_time", TimestampType(), False),
+        StructField("change_type", StringType(), False)
+])
+
+mergeDF = spark.createDataFrame(data=data,schema=schema)
+
+mergeDF.createOrReplaceTempView("mergeTable")
+
+query = f"""MERGE INTO 
+        dev.db.iceberg_table t 
+    USING 
+        (SELECT * FROM mergeTable) s 
+    ON 
+        t.id = s.id
+    WHEN MATCHED AND s.change_type = 'update' THEN UPDATE SET t.name = s.name, t.last_update_time = s.last_update_time 
+    WHEN MATCHED AND s.change_type = 'delete' THEN DELETE
+"""
+
+#spark.sql(query)
