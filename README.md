@@ -87,6 +87,3 @@ Copy and paste the code from the [sample_job.py](https://github.com/ev2900/Icebe
 7. Save and run the Glue job
 
 <img width="900" alt="quick_setup" src="https://github.com/ev2900/Iceberg_Glue_from_JARs/blob/main/README/SaveStart.png">
-
-## Future imporvements for this repositroy
-* Add a CloudFormation stack to deploy the sample Glue job with all of the required configurations documented ^
