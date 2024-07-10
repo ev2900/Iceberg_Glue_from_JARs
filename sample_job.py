@@ -82,7 +82,7 @@ mergeDF = spark.createDataFrame(data=data,schema=schema)
 mergeDF.createOrReplaceTempView("mergeTable")
 
 query = f"""MERGE INTO 
-        dev.db.iceberg_table t 
+        glue_catalog.iceberg.iceberg_table t 
     USING 
         (SELECT * FROM mergeTable) s 
     ON 
