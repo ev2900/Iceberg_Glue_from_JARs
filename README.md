@@ -1,6 +1,6 @@
 # Configure AWS Glue to use Iceberg from JAR files
 
-<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-104-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-859-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-107-green">
+<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-120-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-859-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-107-green">
 
 AWS Glue versions 3.0 and up are natively bundled with the dependencies required to run a version of Apache Iceberg. To use the natively bundled version of iceberg that is included with Glue reference the [Using the Iceberg framework in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-format-iceberg.html) documentation.
 
@@ -18,7 +18,7 @@ There are two ways to run the example either via. a [CloudFormation stack](https
 
 Click on the button below to deploy a CloudFormation stack.
 
-> [!NOTE]  
+> [!NOTE]
 > The cloudformation template has been update to use Iceberg version 1.6.1
 
 [![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=glue-iceberg-from-jars&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/glue_iceberg_jars.yaml)
