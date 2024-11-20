@@ -1,6 +1,6 @@
 # Configure AWS Glue to use Iceberg from JAR files
 
-<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-133-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-987-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-134-green">
+<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-133-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-987-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-136-green">
 
 AWS Glue versions 3.0 and up are natively bundled with the dependencies required to run a version of Apache Iceberg. To use the natively bundled version of iceberg that is included with Glue reference the [Using the Iceberg framework in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-format-iceberg.html) documentation.
 
