@@ -213,7 +213,7 @@ Resources:
           - ''
           - - 's3://'
             - !Ref S3Bucket
-            - '/jars/iceberg-aws-bundle-1.10.0.jar'
+            - '/jars/iceberg-aws-bundle-1.10.0.jar,'
             - 's3://'
             - !Ref S3Bucket
             - '/jars/iceberg-spark-runtime-3.5_2.12-1.10.0.jar'
@@ -223,6 +223,7 @@ Resources:
       NumberOfWorkers: 2
       WorkerType: 'G.1X'
       Timeout: 2880
+
 
 
 
