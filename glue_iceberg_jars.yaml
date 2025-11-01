@@ -219,10 +219,11 @@ Resources:
             - '/jars/iceberg-spark-runtime-3.5_2.12-1.10.0.jar'
         '--s3_bucket_name': !Ref S3Bucket
       MaxRetries: 0
-      GlueVersion: '4.0'
+      GlueVersion: '5.0'
       NumberOfWorkers: 2
       WorkerType: 'G.1X'
       Timeout: 2880
+
 
 
 
