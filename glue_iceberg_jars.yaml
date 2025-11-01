@@ -60,8 +60,7 @@ Resources:
               try:
                 # AWS Bundle
                 response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-aws-bundle/1.10.0/iceberg-aws-bundle-1.10.0.jar')
-
-                print(response)
+                print("AWS bundle JAR download HTTP status " + response.status)
                 
                 if response.status == 200:
                   with open('/tmp/iceberg-aws-bundle-1.10.0.jar', 'wb') as f:
@@ -71,8 +70,7 @@ Resources:
       
                 # Iceberg
                 response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-spark-runtime-3.5_2.12/1.10.0/iceberg-spark-runtime-3.5_2.12-1.10.0.jar')
-
-                print(response)
+                print("Iceberg JAR download HTTP status " + response.status)
       
                 if response.status == 200:
                   with open('/tmp/iceberg-spark-runtime-3.5_2.12-1.10.0.jar', 'wb') as f:
@@ -218,4 +216,5 @@ Resources:
       NumberOfWorkers: 2
       WorkerType: 'G.1X'
       Timeout: 2880
+
 
