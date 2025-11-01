@@ -59,22 +59,22 @@ Resources:
             if event['RequestType'] == 'Create':
               try:
                 # AWS Bundle
-                response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-aws-bundle/1.10.0/iceberg-aws-bundle-1.10.0.jar')
+                response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-aws-bundle/1.6.1/iceberg-aws-bundle-1.6.1.jar')
       
                 if response.status == 200:
-                  with open('/tmp/iceberg-aws-bundle-1.10.0.jar', 'wb') as f:
+                  with open('/tmp/iceberg-aws-bundle-1.6.1.jar', 'wb') as f:
                     f.write(response.data)
           
-                s3.upload_file('/tmp/iceberg-aws-bundle-1.10.0.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-aws-bundle-1.10.0.jar')
+                s3.upload_file('/tmp/iceberg-aws-bundle-1.6.1.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-aws-bundle-1.6.1.jar')
       
                 # Iceberg
-                response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-spark-runtime-3.5_2.12/1.10.0/iceberg-spark-runtime-3.5_2.12-1.10.0.jar')
+                response = http.request('GET', 'https://search.maven.org/remotecontent?filepath=org/apache/iceberg/iceberg-spark-runtime-3.3_2.12/1.6.1/iceberg-spark-runtime-3.3_2.12-1.6.1.jar')
       
                 if response.status == 200:
-                  with open('/tmp/iceberg-spark-runtime-3.5_2.12-1.10.0.jar', 'wb') as f:
+                  with open('/tmp/iceberg-spark-runtime-3.3_2.12-1.6.1.jar', 'wb') as f:
                     f.write(response.data)
           
-                s3.upload_file('/tmp/iceberg-spark-runtime-3.5_2.12-1.10.0.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-spark-runtime-3.5_2.12-1.10.0.jar')
+                s3.upload_file('/tmp/iceberg-spark-runtime-3.3_2.12-1.6.1.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-spark-runtime-3.3_2.12-1.6.1.jar')
   
                 # Glue Job Script
                 copy_source = {
@@ -214,4 +214,3 @@ Resources:
       NumberOfWorkers: 2
       WorkerType: 'G.1X'
       Timeout: 2880
-
