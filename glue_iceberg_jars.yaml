@@ -59,7 +59,9 @@ Resources:
             if event['RequestType'] == 'Create':
               try:
                 # AWS Bundle
+                print('Downloading AWS bundle JAR ...')
                 response = http.request('GET', 'https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-aws-bundle/1.10.0/iceberg-aws-bundle-1.10.0.jar')
+                print("AWS bundle JAR download HTTP status " + str(response.status))
       
                 if response.status == 200:
                   with open('/tmp/iceberg-aws-bundle-1.10.0.jar', 'wb') as f:
@@ -68,7 +70,9 @@ Resources:
                 s3.upload_file('/tmp/iceberg-aws-bundle-1.10.0.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-aws-bundle-1.10.0.jar')
       
                 # Iceberg
+                print('Downloading Iceberg bundle JAR ...')
                 response = http.request('GET', 'https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.5_2.12/1.10.0/iceberg-spark-runtime-3.5_2.12-1.10.0.jar')
+                print("Iceberg JAR download HTTP status " + str(response.status))
       
                 if response.status == 200:
                   with open('/tmp/iceberg-spark-runtime-3.5_2.12-1.10.0.jar', 'wb') as f:
@@ -214,3 +218,4 @@ Resources:
       NumberOfWorkers: 2
       WorkerType: 'G.1X'
       Timeout: 2880
+
