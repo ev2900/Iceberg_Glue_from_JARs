@@ -141,7 +141,8 @@ Resources:
                 }          
       Timeout: 300
       MemorySize: 2048
-      EphemeralStorage: 5120
+      EphemeralStorage: 
+        Size: 5120
       Environment:
         Variables:
           S3_BUCKET_NAME: !Ref S3Bucket
@@ -222,5 +223,6 @@ Resources:
       NumberOfWorkers: 2
       WorkerType: 'G.1X'
       Timeout: 2880
+
 
 
