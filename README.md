@@ -19,7 +19,7 @@ There are two ways to run the example either via. a [CloudFormation stack](https
 Click on the button below to deploy a CloudFormation stack.
 
 > [!NOTE]
-> The cloudformation template has been update to use Iceberg version 1.6.1
+> The cloudformation template has been update to use Iceberg version 1.10.0
 
 [![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=glue-iceberg-from-jars&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/glue_iceberg_jars.yaml)
 
