@@ -139,8 +139,8 @@ Resources:
                   'statusCode': 400,
                   'body': 'failed to delete files from S3'
                 }          
-      Timeout: 300
-      Memory: 2048
+      Timeout: 180
+      MemorySize: 2048
       Environment:
         Variables:
           S3_BUCKET_NAME: !Ref S3Bucket
@@ -221,6 +221,7 @@ Resources:
       NumberOfWorkers: 2
       WorkerType: 'G.1X'
       Timeout: 2880
+
 
 
 
