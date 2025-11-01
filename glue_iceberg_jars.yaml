@@ -59,29 +59,23 @@ Resources:
             if event['RequestType'] == 'Create':
               try:
                 # AWS Bundle
-                print('Downloading AWS bundle JAR ...')
-                response_aws_bundle = http.request('GET', 'https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-aws-bundle/1.10.0/iceberg-aws-bundle-1.10.0.jar', timeout=urllib3.Timeout(connect=5.0, read=30.0))
-                print("AWS bundle JAR download HTTP status " + str(response_aws_bundle.status))
-                
-                if response_aws_bundle.status == 200:
+                response = http.request('GET', 'https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-aws-bundle/1.10.0/iceberg-aws-bundle-1.10.0.jar')
+      
+                if response.status == 200:
                   with open('/tmp/iceberg-aws-bundle-1.10.0.jar', 'wb') as f:
-                    f.write(response_aws_bundle.data)
-                  os.sync()
+                    f.write(response.data)
           
                 s3.upload_file('/tmp/iceberg-aws-bundle-1.10.0.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-aws-bundle-1.10.0.jar')
       
                 # Iceberg
-                print('Downloading Iceberg bundle JAR ...')
-                response_iceberg = http.request('GET', 'https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.5_2.12/1.10.0/iceberg-spark-runtime-3.5_2.12-1.10.0.jar', timeout=urllib3.Timeout(connect=5.0, read=120.0))
-                print("Iceberg JAR download HTTP status " + str(response_iceberg.status))
+                response = http.request('GET', 'https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-3.5_2.12/1.10.0/iceberg-spark-runtime-3.5_2.12-1.10.0.jar')
       
-                if response_iceberg.status == 200:
+                if response.status == 200:
                   with open('/tmp/iceberg-spark-runtime-3.5_2.12-1.10.0.jar', 'wb') as f:
-                    f.write(response_iceberg.data)
-                  os.sync()
+                    f.write(response.data)
           
                 s3.upload_file('/tmp/iceberg-spark-runtime-3.5_2.12-1.10.0.jar', os.environ['S3_BUCKET_NAME'], 'jars/iceberg-spark-runtime-3.5_2.12-1.10.0.jar')
-               
+  
                 # Glue Job Script
                 copy_source = {
                   'Bucket': 'sharkech-public',
@@ -139,9 +133,7 @@ Resources:
                   'statusCode': 400,
                   'body': 'failed to delete files from S3'
                 }          
-      Timeout: 180
-      MemorySize: 2048
-      EphemeralStorage: 5120
+      Timeout: 300
       Environment:
         Variables:
           S3_BUCKET_NAME: !Ref S3Bucket
@@ -212,7 +204,7 @@ Resources:
           - ''
           - - 's3://'
             - !Ref S3Bucket
-            - '/jars/iceberg-aws-bundle-1.10.0.jar,'
+            - '/jars/iceberg-aws-bundle-1.10.0.jar'
             - 's3://'
             - !Ref S3Bucket
             - '/jars/iceberg-spark-runtime-3.5_2.12-1.10.0.jar'
@@ -222,11 +214,3 @@ Resources:
       NumberOfWorkers: 2
       WorkerType: 'G.1X'
       Timeout: 2880
-
-
-
-
-
-
-
-
